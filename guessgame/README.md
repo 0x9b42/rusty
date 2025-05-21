@@ -68,7 +68,7 @@ Overflow buffer[32] with crafted input → overwrite return address → point to
 
 Example:
 
-080491e2 <win>:
+`080491e2 <win>:`
 
 
 ---

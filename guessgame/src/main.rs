@@ -8,23 +8,31 @@ use crate::rand::Rng;
 
 fn main() {
     let secret = rand::rng().random_range(1..101);
-    let mut guess = String::new();
 
-    print!("pls guess a number: ");
-    io::stdout().flush().unwrap();
+    println!("guess a number between 1-100");
+    println!("you got 10 chances.");
 
-    io::stdin().read_line(&mut guess)
-        .expect("failed to read line");
+    for _ in 0..10 {
+        let mut guess = String::new();
+        print!("pls guess a number: ");
+        io::stdout().flush().unwrap();
 
-    let guess:i32 = guess.trim().parse()
-        .expect("please type a number!");
+        io::stdin().read_line(&mut guess)
+            .expect("failed to read line");
 
-    match guess.cmp(&secret) {
-        Ordering::Less => println!("too small"),
-        Ordering::Greater => println!("too much"),
-        Ordering::Equal => println!("congrats")
+        let guess:i32 = guess.trim().parse()
+            .expect("please type a number!");
+
+        match guess.cmp(&secret) {
+            Ordering::Less => println!("too small"),
+            Ordering::Greater => println!("too much"),
+            Ordering::Equal => {
+                println!("CONGRATS!!");
+                break;
+            }
+        }
     }
 
-    println!("you guessed : {}", guess);
-    println!("secret num. : {}", secret);
+    //println!("you guessed : {}", guess);
+    //println!("secret num. : {}", secret);
 }
